@@ -387,11 +387,11 @@ if(isset($_POST['login']))
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
 			<span>OR USE YOUR EMAIL FOR REGISTERATION.</span>
-			<input id="text" type="text" name="nusername" placeholder="Userame" required/>
-			<input id="text" type="email" name="nemail" placeholder="Email" required/>
-			<input id="number" type="number" name="nphone" placeholder="Phone Number" maxlength=10 required/>
-			<input id="epass" type="password" name="npassword" placeholder="Password" required/>
-            <input id="ecpass" type="password" name="ncpassword" placeholder="Confirm Password" required/>
+			<input id="text" type="text" name="nusername" placeholder="Userame:" required/>
+			<input id="text" type="email" name="nemail" placeholder="Email:" required/>
+			<input id="number" type="number" name="nphone" placeholder="Phone Number:" maxlength=10 required/>
+			<input id="epass" type="password" name="npassword" placeholder="Password:" required/>
+            <input id="ecpass" type="password" name="ncpassword" placeholder="Confirm Password:" required/>
 			<button type="submit" name="submit">Sign Up</button>
 		</form>
 	</div>
