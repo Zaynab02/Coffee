@@ -1,5 +1,7 @@
-<?php
+<?php 
+session_start();
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -19,6 +21,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
     <title>Forgot Password</title>
+
+    <!-- PHP CONNECTION FILE -->
+	<?php include 'connect.php' ?>
 
     <!-- CSS File -->
     <style>
@@ -107,14 +112,71 @@ button[type='submit']:hover{
 
 </head>
 
+<?php
+
+if(isset($_POST['login']))
+{
+    $email = $_POST['memail'];
+
+    $email_search = "SELECT * FROM signup WHERE email = '$email'";
+    $query = mysqli_query($conn, $email_search);
+    $count = mysqli_num_rows($query);
+    if($count == 1)
+    {
+        // Generate a random password
+        $newPassword = substr(md5(uniqid(mt_rand(), true)), 0, 8); // Generate an 8-character random password
+
+        // Encrypt the new password with MD5
+        $hashedPassword = md5($newPassword);
+
+        // Update the password in the database
+        $sql = "UPDATE signup SET password = '$hashedPassword', cpassword = '$hashedPassword' WHERE email = '$email'";
+
+        // Check if the password update was successful
+        if(mysqli_query($conn, $sql))
+        {
+            ?>
+            <script>
+                alert("Successfull");
+            </script>
+            <?php
+        }
+        else
+        {
+            ?>
+            <script>
+                alert("Failed");
+            </script>
+            <?php
+        }
+        ?>
+        <script>
+            var variableData = "<?php echo $newPassword; ?>";
+            alert(variableData);
+        </script>
+        <?php
+    }
+    else
+    {
+        ?>
+        <script>
+            alert("Inavlid Email-ID")
+        </script>
+        <?php
+    }
+}
+?>
+
 <body>
-    <div class="card">
+<div class="card">
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <p class="lock-icon"><i class="fas fa-lock"></i></p>
         <h2>Forgot Password?</h2>
         <p>YOU CAN RESET YOUR PASSWORD HERE.</p>
-        <input type="text" class="passInput" placeholder="Email Address">
-        <button>Send My Password</button>
-    </div>
+        <input class="passInput" name="memail" type="email" placeholder="Email-ID"  required>
+        <button type="login" name="login">Show My Password</button>
+    </form>
+</div>
 </body>
 
 </html>

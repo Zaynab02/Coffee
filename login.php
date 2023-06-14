@@ -406,7 +406,7 @@ if(isset($_POST['login']))
 			<span>OR USE YOUR ACCOUNT.</span>
 			<input id="text" type="email" name="nemail" placeholder="Email" required/>
 			<input id="epass" type="password" name="npassword" placeholder="Password" required/>
-			<a href="forgot.php">Forgot your password?</a>
+			<a href="forgotpass.php">Forgot your password?</a>
             <a href="change.php">Change Password</a>
 			<button type="login" name="login">Sign In</button>
 		</form>
